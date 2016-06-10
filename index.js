@@ -44,7 +44,6 @@ var app = express();
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
-
 app.use('/parse/edu', eduApi);
 app.use('/parse/pm', pmApi);
 
@@ -56,13 +55,13 @@ var dashboardConfig ={
         {
             "serverURL": (process.env.SERVER_URL + '/edu') || 'http://localhost:1337/parse',
             "appId": process.env.EDU_APP_ID,
-            "masterKey": "myMasterKey",
+            "masterKey": process.env.MASTER_KEY,
             "appName": "EduApp"
         },
         {
             "serverURL": (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',
             "appId": process.env.PM_APP_ID,
-            "masterKey": "myMasterKey",
+            "masterKey": process.env.MASTER_KEY,
             "appName": "PmApp"
         }
     ],
