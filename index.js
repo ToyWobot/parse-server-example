@@ -18,7 +18,7 @@ var eduApi = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/edu/main.js',
   appId: process.env.EDU_APP_ID,
   masterKey: process.env.MASTER_KEY, //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
+  serverURL: (process.env.SERVER_URL + '/edu') || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
@@ -30,7 +30,7 @@ var pmApi = new ParseServer({
     cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/pm/main.js',
     appId: process.env.PM_APP_ID,
     masterKey: process.env.MASTER_KEY, //Add your master key here. Keep it secret!
-    serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
+    serverURL: (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
     liveQuery: {
         classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
     }
