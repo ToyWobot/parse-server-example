@@ -6,16 +6,17 @@ var ParseServer = require('parse-server').ParseServer;
 var ParseDashboard = require('parse-dashboard');
 var path = require('path');
 
-var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
+var eduDatabaseUri = process.env.EDU_MONGODB_URI;
+var pmDatabaseUri = process.env.PM_MONGODB_URI;
 
 if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
 }
 
-var api = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
-  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'myAppId',
+var eduApi = new ParseServer({
+  databaseURI: eduDatabaseUri || 'mongodb://localhost:27017/dev',
+  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/edu/main.js',
+  appId: process.env.EDU_APP_ID,
   masterKey: process.env.MASTER_KEY, //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
@@ -23,14 +24,46 @@ var api = new ParseServer({
   }
 });
 
+
+var pmApi = new ParseServer({
+    databaseURI: pmDatabaseUri || 'mongodb://localhost:27017/dev',
+    cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/pm/main.js',
+    appId: process.env.PM_APP_ID,
+    masterKey: process.env.MASTER_KEY, //Add your master key here. Keep it secret!
+    serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
+    liveQuery: {
+        classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+    }
+});
+
+// Client-keys like the javascript key or the .NET key are not necessary with parse-server
+// If you wish you require them, you can set them as options in the initialization above:
+// javascriptKey, restAPIKey, dotNetKey, clientKey
+
+var app = express();
+
+// Serve static assets from the /public folder
+app.use('/public', express.static(path.join(__dirname, '/public')));
+
+app.use('/parse/edu', eduApi);
+app.use('/parse/pm', pmApi);
+
+
+
 var dashboardConfig ={
     "allowInsecureHTTP": true,
     "apps": [
         {
-            "serverURL": process.env.SERVER_URL || 'http://localhost:1337/parse',
-            "appId": "myAppId",
+            "serverURL": (process.env.SERVER_URL + '/edu') || 'http://localhost:1337/parse',
+            "appId": process.env.EDU_APP_ID,
             "masterKey": "myMasterKey",
             "appName": "EduApp"
+        },
+        {
+            "serverURL": (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',
+            "appId": process.env.PM_APP_ID,
+            "masterKey": "myMasterKey",
+            "appName": "PmApp"
         }
     ],
     "users":[
@@ -44,19 +77,6 @@ var dashboardConfig ={
 
 var dashboard = new ParseDashboard(dashboardConfig, dashboardConfig.allowInsecureHTTP);
 
-
-// Client-keys like the javascript key or the .NET key are not necessary with parse-server
-// If you wish you require them, you can set them as options in the initialization above:
-// javascriptKey, restAPIKey, dotNetKey, clientKey
-
-var app = express();
-
-// Serve static assets from the /public folder
-app.use('/public', express.static(path.join(__dirname, '/public')));
-
-// Serve the Parse API on the /parse URL prefix
-var mountPath = process.env.PARSE_MOUNT || '/parse';
-app.use(mountPath, api);
 
 app.use('/dashboard', dashboard);
 
