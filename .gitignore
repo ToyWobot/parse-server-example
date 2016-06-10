@@ -28,3 +28,29 @@ node_modules
 
 # Emacs
 *~
+
+.idea/.name
+
+.idea/compiler.xml
+
+.idea/copyright/profiles_settings.xml
+
+.idea/encodings.xml
+
+.idea/misc.xml
+
+.idea/modules.xml
+
+.idea/scopes/scope_settings.xml
+
+.idea/vcs.xml
+
+.idea/workspace.xml
+
+.idea/runConfigurations/bin_www.xml
+
+.idea/jsLibraryMappings.xml
+
+.idea/libraries/parse_server_example_node_modules.xml
+
+parse-server-example.iml
