@@ -33,6 +33,14 @@ var pmApi = new ParseServer({
     serverURL: (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
     liveQuery: {
         classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+    },
+    push :{
+        
+        ios:{
+            pfx: __dirname + '/cloud/pm/key/Certificates_PM_EDU_Production.p12',
+            bundleId: 'com.edu.playmessenger',
+            production: true
+        }
     }
 });
 
