@@ -9,7 +9,7 @@ var path = require('path');
 var eduDatabaseUri = process.env.EDU_MONGODB_URI;
 var pmDatabaseUri = process.env.PM_MONGODB_URI;
 
-if (!databaseUri) {
+if (!eduDatabaseUri || !pmDatabaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
 }
 
