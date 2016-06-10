@@ -23,16 +23,26 @@ var api = new ParseServer({
   }
 });
 
-var dashboard = new ParseDashboard({
+var dashboardConfig ={
+    "allowInsecureHTTP": true,
     "apps": [
         {
-            "serverURL": "https://tw-parse-server.herokuapp.com/parse",
+            "serverURL": process.env.SERVER_URL || 'http://localhost:1337/parse',
             "appId": "myAppId",
             "masterKey": "myMasterKey",
             "appName": "EduApp"
         }
+    ],
+    "users":[
+        {
+            "user":"admin",
+            "pass":"pass"
+        }
+
     ]
-});
+};
+
+var dashboard = new ParseDashboard(dashboardConfig, dashboardConfig.allowInsecureHTTP);
 
 
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
