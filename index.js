@@ -27,7 +27,7 @@ var eduApi = new ParseServer({
   push :{
     ios:[
         {
-            pdx: __dirname + '/certs/Certificates_PM_EDU_Production.p12',
+            pfx: __dirname + '/certs/Certificates_PM_EDU_Production.p12',
             bundleId: 'com.edu.playmessenger',
             production: true
         }
