@@ -22,7 +22,16 @@ var eduApi = new ParseServer({
   serverURL: (process.env.SERVER_URL + '/edu') || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
-  }
+  },
+  push :{
+    ios:[
+        {
+            pdx: __dirname + '/certs/Certificates_PM_EDU_Production.p12',
+            bundleId: 'com.edu.playmessenger',
+            production: true
+        }
+    ]
+    }
 });
 
 
@@ -35,16 +44,6 @@ var pmApi = new ParseServer({
     serverURL: (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
     liveQuery: {
         classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
-    },
-    push :{
-
-        ios:[
-            {
-                pdx: __dirname + '/certs/Certificates_PM_EDU_Production.p12',
-                bundleId: 'com.edu.playmessenger',
-                production: true
-            }
-        ]
     }
 });
 
