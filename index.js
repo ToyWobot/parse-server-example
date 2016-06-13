@@ -62,7 +62,7 @@ app.use('/parse/edu', eduApi);
 
 
 var dashboardConfig ={
-    "allowInsecureHTTP": true,
+    "allowInsecureHTTP": process.env.DASHBOARD_INSECURE_HTTP,
     "apps": [
         {
             "serverURL": (process.env.SERVER_URL + '/edu') || 'http://localhost:1337/parse',
