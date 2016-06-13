@@ -27,13 +27,17 @@ var eduApi = new ParseServer({
   push :{
         ios:[
             {
-                pfx: __dirname + '/certs/Certificates-3.p12',
-                bundleId: 'com.edu.playmessenger',
+                pfx: __dirname + '/certs/eddy/Certificates_Eddy_APNS_Development.p12',
+                bundleId: 'com.eddy.app',
                 production: false
+            },
+            {
+                pfx: __dirname + '/certs/eddy/Certificates_Eddy_APNS_Production.p12',
+                bundleId: 'com.eddy.app',
+                production: true
             }
         ]
-    },
-  verbose: process.env.VERBOSE
+    }
 });
 
 
