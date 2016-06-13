@@ -35,10 +35,7 @@ var pmApi = new ParseServer({
         classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
     },
     push :{
-        android: {
-            senderId: '', // The Sender ID of GCM
-            apiKey: '' // The Server API Key of GCM
-        },
+        
         ios:{
             pfx: __dirname + '/certs/Certificates_PM_EDU_Production.p12',
             bundleId: 'com.edu.playmessenger',
