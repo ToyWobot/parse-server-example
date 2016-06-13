@@ -7,9 +7,9 @@ var ParseDashboard = require('parse-dashboard');
 var path = require('path');
 
 var eduDatabaseUri = process.env.EDU_MONGODB_URI;
-var pmDatabaseUri = process.env.PM_MONGODB_URI;
+//var pmDatabaseUri = process.env.MONGOLAB_COPPER_URI;
 
-if (!eduDatabaseUri || !pmDatabaseUri) {
+if (!eduDatabaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
 }
 
@@ -17,8 +17,9 @@ var eduApi = new ParseServer({
   databaseURI: eduDatabaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/edu/main.js',
   appId: process.env.EDU_APP_ID,
-  masterKey: process.env.MASTER_KEY, //Add your master key here. Keep it secret!
-  restAPIKey: process.env.REST_API_KEY,
+  masterKey: process.env.EDU_MASTER_KEY, //Add your master key here. Keep it secret!
+  restAPIKey: process.env.EDU_REST_API_KEY,
+  clientKey: process.env.EDU_CLIENT_KEY,
   serverURL: (process.env.SERVER_URL + '/edu') || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
@@ -35,17 +36,17 @@ var eduApi = new ParseServer({
 });
 
 
-var pmApi = new ParseServer({
-    databaseURI: pmDatabaseUri || 'mongodb://localhost:27017/dev',
-    cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/pm/main.js',
-    appId: process.env.PM_APP_ID,
-    masterKey: process.env.MASTER_KEY, //Add your master key here. Keep it secret!
-    restAPIKey: process.env.REST_API_KEY,
-    serverURL: (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
-    liveQuery: {
-        classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
-    }
-});
+//var pmApi = new ParseServer({
+//    databaseURI: pmDatabaseUri || 'mongodb://localhost:27017/dev',
+//    cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/pm/main.js',
+//    appId: process.env.PM_APP_ID,
+//    masterKey: process.env.MASTER_KEY, //Add your master key here. Keep it secret!
+//    restAPIKey: process.env.REST_API_KEY,
+//    serverURL: (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
+//    liveQuery: {
+//        classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+//    }
+//});
 
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
@@ -56,7 +57,7 @@ var app = express();
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
 app.use('/parse/edu', eduApi);
-app.use('/parse/pm', pmApi);
+//app.use('/parse/pm', pmApi);
 
 
 
@@ -66,17 +67,18 @@ var dashboardConfig ={
         {
             "serverURL": (process.env.SERVER_URL + '/edu') || 'http://localhost:1337/parse',
             "appId": process.env.EDU_APP_ID,
-            "masterKey": process.env.MASTER_KEY,
-            "restAPIKey": process.env.REST_API_KEY,
+            "masterKey": process.env.EDU_MASTER_KEY,
+            "restAPIKey": process.env.EDU_REST_API_KEY,
+            "clientKey": process.env.EDU_CLIENT_KEY,
             "appName": "EduApp"
         },
-        {
-            "serverURL": (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',
-            "appId": process.env.PM_APP_ID,
-            "masterKey": process.env.MASTER_KEY,
-            "restAPIKey": process.env.REST_API_KEY,
-            "appName": "PmApp"
-        }
+        //{
+        //    "serverURL": (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',
+        //    "appId": process.env.PM_APP_ID,
+        //    "masterKey": process.env.MASTER_KEY,
+        //    "restAPIKey": process.env.REST_API_KEY,
+        //    "appName": "PmApp"
+        //}
     ],
     "users":[
         {
