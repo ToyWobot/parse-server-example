@@ -35,12 +35,14 @@ var pmApi = new ParseServer({
         classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
     },
     push :{
-        
-        ios:{
-            pfx: __dirname + '/certs/Certificates_PM_EDU_Production.p12',
-            bundleId: 'com.edu.playmessenger',
-            production: true
-        }
+
+        ios:[
+            {
+                pdx: __dirname + '/certs/Certificates_PM_EDU_Production.p12',
+                bundleId: 'com.edu.playmessenger',
+                production: true
+            }
+        ]
     }
 });
 
