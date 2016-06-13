@@ -25,14 +25,15 @@ var eduApi = new ParseServer({
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   },
   push :{
-    ios:[
-        {
-            pfx: __dirname + '/certs/Certificates-3.p12',
-            bundleId: 'com.edu.playmessenger',
-            production: false
-        }
-    ]
-    }
+        ios:[
+            {
+                pfx: __dirname + '/certs/Certificates-3.p12',
+                bundleId: 'com.edu.playmessenger',
+                production: false
+            }
+        ]
+    },
+  verbose: process.env.VERBOSE
 });
 
 
