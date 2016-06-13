@@ -70,13 +70,13 @@ var dashboardConfig ={
     "allowInsecureHTTP": process.env.DASHBOARD_INSECURE_HTTP,
     "apps": [
         {
-            "serverURL": (process.env.SERVER_URL + '/edu') || 'http://localhost:1337/parse',
+            "serverURL": (process.env.SERVER_URL + '/edu'),
             "appId": process.env.EDU_APP_ID,
             "masterKey": process.env.EDU_MASTER_KEY,
             "restAPIKey": process.env.EDU_REST_API_KEY,
             "clientKey": process.env.EDU_CLIENT_KEY,
             "appName": "EduApp"
-        },
+        }
         //{
         //    "serverURL": (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',
         //    "appId": process.env.PM_APP_ID,
@@ -107,9 +107,9 @@ app.get('/', function(req, res) {
 
 // There will be a test page available on the /test path of your server url
 // Remove this before launching your app
-app.get('/test', function(req, res) {
-  res.sendFile(path.join(__dirname, '/public/test.html'));
-});
+//app.get('/test', function(req, res) {
+//  res.sendFile(path.join(__dirname, '/public/test.html'));
+//});
 
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
