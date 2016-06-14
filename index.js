@@ -65,33 +65,6 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 app.use('/parse/edu', eduApi);
 app.use('/parse/aly', alyApi);
 
-//var dashboardConfig ={
-//    "allowInsecureHTTP": process.env.DASHBOARD_INSECURE_HTTP,
-//    "apps": [
-//        {
-//            "serverURL": "https://tw-parse-server.herokuapp.com/parse/edu",
-//            "appId": "3763213299",
-//            "masterKey": "9jwczspNPUAbasjGSs0TcUklsxnbLzeG",
-//            "appName": "EduApp",
-//            "production": false
-//        },
-//        {
-//            "serverURL": "https://tw-parse-server.herokuapp.com/parse/aly",
-//            "appId": "3763213300",
-//            "masterKey": "BStgFP6PCX3MCTGYljUsHn7EUCeRu74u",
-//            "appName": "AlyApp",
-//            "production": false
-//        }
-//    ],
-//    "users":[
-//        {
-//            "user":"admin",
-//            "pass":"pass"
-//        }
-//
-//    ]
-//};
-
 var serverConfig = require('./server-config.json');
 //var appServers = serverConfig.servers;
 //Object.keys(appServers).forEach(function(appId) {

@@ -64,9 +64,9 @@
           },
           {
             "serverURL": "https://tw-parse-server.herokuapp.com/parse/aly",
-            "appId": "3763213299",
+            "appId": "3763213300",
             "masterKey": "BStgFP6PCX3MCTGYljUsHn7EUCeRu74u",
-            "appName": "EduApp",
+            "appName": "AlyApp",
             "production": false
           }
       ],
