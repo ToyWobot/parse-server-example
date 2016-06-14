@@ -102,7 +102,9 @@ if (!eduDatabaseUri) {
 var serverConfig = require('./server-config.json');
 var appServers = serverConfig.servers;
 Object.keys(appServers).forEach(function(appId) {
+    console.log(appId);
     var appOptions = appServers[appId];
+    console.log(appOptions);
     var appObject = new ParseServer(appOptions);
     app.use('/parse/'+appId, appObject);
 });
