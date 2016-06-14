@@ -99,7 +99,7 @@ if (!eduDatabaseUri) {
 //    ]
 //};
 
-var serverConfig = require('server-config.json');
+var serverConfig = require('./server-config.json');
 
 serverConfig.servers.keys(apps).forEach(function(appId) {
     var appOptions = apps[appId];
