@@ -54,3 +54,5 @@ node_modules
 .idea/libraries/parse_server_example_node_modules.xml
 
 parse-server-example.iml
+
+.idea/uiDesigner.xml
