@@ -25,6 +25,10 @@ var eduApi = new ParseServer({
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   },
   push :{
+        android : {
+            senderId: '316172193173',
+            apiKey: 'AIzaSyB3SuPcXiEUvZCT284ctWJWG3pIQQyT9JE'
+        },
         ios:[
             {
                 pfx: __dirname + '/certs/eddy/Certificates_Eddy_APNS_Development.p12',
