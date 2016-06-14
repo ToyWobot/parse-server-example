@@ -75,7 +75,8 @@ var dashboardConfig ={
             "masterKey": process.env.EDU_MASTER_KEY,
             "restAPIKey": process.env.EDU_REST_API_KEY,
             "clientKey": process.env.EDU_CLIENT_KEY,
-            "appName": "EduApp"
+            "appName": "EduApp",
+            "production": process.env.EDU_PRODUCTION
         }
         //{
         //    "serverURL": (process.env.SERVER_URL + '/pm') || 'http://localhost:1337/parse',
