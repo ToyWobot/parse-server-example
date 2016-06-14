@@ -1,0 +1,83 @@
+{
+  "servers":
+  {
+      "eddy":
+      {
+          "databaseURI": "mongodb://heroku_3fz1xrmt:d1edrqdq3amnljg795dl7f784r@ds035290.mlab.com:35290/heroku_3fz1xrmt",
+          "cloud": "cloud/edu/main.js",
+          "appId": "3763213299",
+          "masterKey": "9jwczspNPUAbasjGSs0TcUklsxnbLzeG",
+          "restAPIKey": "OswHG5ZLJuT3RAP0Qv7YELWFWYsw8JwI",
+          "clientKey": "HOTSRVWontAPfFa2EU2vgEWGXPyBkCmc",
+          "serverURL": "https://tw-parse-server.herokuapp.com/parse/edu",
+          "liveQuery": {
+            "classNames": ["Posts", "Comments"]
+          },
+          "push" :
+          {
+              "ios":
+              [
+                  {
+                    "pfx": "certs/eddy/Certificates_Eddy_APNS_Development.p12",
+                    "bundleId": "com.eddy.app",
+                    "production": false
+                  },
+                  {
+                    "pfx": "certs/eddy/Certificates_Eddy_APNS_Production.p12",
+                    "bundleId": "com.eddy.app",
+                    "production": true
+                  }
+              ]
+          }
+      },
+
+      "aly":
+      {
+          "databaseURI": "mongodb://heroku_vjzztwdt:apb6sgvmqronanrlophhr3u1kc@ds013014.mlab.com:13014/heroku_vjzztwdt",
+          "cloud": "cloud/main.js",
+          "appId": "3763213300",
+          "masterKey": "BStgFP6PCX3MCTGYljUsHn7EUCeRu74u",
+          "restAPIKey": "REsA64SL5FIBIeZthgBDYWwY7daQpAm1",
+          "clientKey": "RN2hNqvuelw4NyRNxrN3ELPPyAnD5cdk",
+          "serverURL": "https://tw-parse-server.herokuapp.com/parse/aly",
+          "liveQuery": {
+            "classNames": ["Posts", "Comments"]
+          },
+          "push" :
+          {
+
+          }
+      }
+  },
+
+  "dashboard":
+  {
+      "allowInsecureHTTP": true,
+      "apps":
+      [
+          {
+            "serverURL": "https://tw-parse-server.herokuapp.com/parse/edu",
+            "appId": "3763213299",
+            "masterKey": "9jwczspNPUAbasjGSs0TcUklsxnbLzeG",
+            "appName": "EduApp",
+            "production": false
+          },
+          {
+            "serverURL": "https://tw-parse-server.herokuapp.com/parse/aly",
+            "appId": "3763213299",
+            "masterKey": "BStgFP6PCX3MCTGYljUsHn7EUCeRu74u",
+            "appName": "EduApp",
+            "production": false
+          }
+      ],
+      "users":
+      [
+          {
+            "user":"admin",
+            "pass":"tr@g3rt#4dsy9r"
+          }
+      ]
+  }
+
+
+}
