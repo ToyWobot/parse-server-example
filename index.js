@@ -69,7 +69,7 @@ var serverConfig = require('./server-config.json');
 var appServers = serverConfig.servers;
 appServers.forEach(function(options) {
     var appObject = new ParseServer(options);
-    var s = options.serverURL.split('parse');
+    var s = options.serverURL.split('/parse');
     console.log(s);
     var endPoint = '/parse'+ s[1];
     app.use(endPoint, appObject);
