@@ -14,6 +14,10 @@
           },
           "push" :
           {
+              "android":{
+                "senderId": "316172193173",
+                "apiKey": "AIzaSyB3SuPcXiEUvZCT284ctWJWG3pIQQyT9JE"
+              },
               "ios":
               [
                   {
