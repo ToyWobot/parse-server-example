@@ -14,66 +14,66 @@ if (!eduDatabaseUri) {
 }
 
 
-var eduApi = new ParseServer({
-  databaseURI: eduDatabaseUri || 'mongodb://localhost:27017/dev',
-  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/edu/main.js',
-  appId: process.env.EDU_APP_ID,
-  masterKey: process.env.EDU_MASTER_KEY, //Add your master key here. Keep it secret!
-  restAPIKey: process.env.EDU_REST_API_KEY,
-  clientKey: process.env.EDU_CLIENT_KEY,
-  serverURL: (process.env.SERVER_URL + '/edu'),  // Don't forget to change to https if needed
-  liveQuery: {
-    classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
-  },
-  push :{
-        android : {
-            senderId: '316172193173',
-            apiKey: 'AIzaSyB3SuPcXiEUvZCT284ctWJWG3pIQQyT9JE'
-        },
-        ios:[
-            {
-                pfx: __dirname + '/certs/eddy/Certificates_Eddy_APNS_Development.p12',
-                bundleId: 'com.eddy.app',
-                production: false
-            },
-            {
-                pfx: __dirname + '/certs/eddy/Certificates_Eddy_APNS_Production.p12',
-                bundleId: 'com.eddy.app',
-                production: true
-            }
-        ]
-    }
-});
-
-
-var alyApi = new ParseServer({
-    databaseURI: alyDatabaseUri || 'mongodb://localhost:27017/dev',
-    cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-    appId: '3763213300',
-    masterKey: 'BStgFP6PCX3MCTGYljUsHn7EUCeRu74u', //Add your master key here. Keep it secret!
-    restAPIKey: 'REsA64SL5FIBIeZthgBDYWwY7daQpAm1',
-    clientKey: 'RN2hNqvuelw4NyRNxrN3ELPPyAnD5cdk',
-    serverURL: (process.env.SERVER_URL + '/aly'),  // Don't forget to change to https if needed
-    liveQuery: {
-        classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
-    }
-});
+//var eduApi = new ParseServer({
+//  databaseURI: eduDatabaseUri || 'mongodb://localhost:27017/dev',
+//  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/edu/main.js',
+//  appId: process.env.EDU_APP_ID,
+//  masterKey: process.env.EDU_MASTER_KEY, //Add your master key here. Keep it secret!
+//  restAPIKey: process.env.EDU_REST_API_KEY,
+//  clientKey: process.env.EDU_CLIENT_KEY,
+//  serverURL: (process.env.SERVER_URL + '/edu'),  // Don't forget to change to https if needed
+//  liveQuery: {
+//    classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+//  },
+//  push :{
+//        android : {
+//            senderId: '316172193173',
+//            apiKey: 'AIzaSyB3SuPcXiEUvZCT284ctWJWG3pIQQyT9JE'
+//        },
+//        ios:[
+//            {
+//                pfx: __dirname + '/certs/eddy/Certificates_Eddy_APNS_Development.p12',
+//                bundleId: 'com.eddy.app',
+//                production: false
+//            },
+//            {
+//                pfx: __dirname + '/certs/eddy/Certificates_Eddy_APNS_Production.p12',
+//                bundleId: 'com.eddy.app',
+//                production: true
+//            }
+//        ]
+//    }
+//});
+//
+//
+//var alyApi = new ParseServer({
+//    databaseURI: alyDatabaseUri || 'mongodb://localhost:27017/dev',
+//    cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
+//    appId: '3763213300',
+//    masterKey: 'BStgFP6PCX3MCTGYljUsHn7EUCeRu74u', //Add your master key here. Keep it secret!
+//    restAPIKey: 'REsA64SL5FIBIeZthgBDYWwY7daQpAm1',
+//    clientKey: 'RN2hNqvuelw4NyRNxrN3ELPPyAnD5cdk',
+//    serverURL: (process.env.SERVER_URL + '/aly'),  // Don't forget to change to https if needed
+//    liveQuery: {
+//        classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+//    }
+//});
 
 var app = express();
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
-app.use('/parse/edu', eduApi);
-app.use('/parse/aly', alyApi);
+//app.use('/parse/edu', eduApi);
+//app.use('/parse/aly', alyApi);
 
 var serverConfig = require('./server-config.json');
-//var appServers = serverConfig.servers;
-//Object.keys(appServers).forEach(function(appId) {
-//    console.log(appId);
-//    var appOptions = appServers[appId];
-//    console.log(appOptions);
-//    var appObject = new ParseServer(appOptions);
-//    app.use('/parse/'+appId, appObject);
-//});
+var appServers = serverConfig.servers;
+appServers.forEach(function(app) {
+    var appObject = new ParseServer(app);
+    var s = app.serverURL.split('parse');
+    console.log(s);
+    var endPoint = '/parse'+ s[1];
+    app.use(endPoint, appObject);
+});
 
 var dashboard = new ParseDashboard(serverConfig.dashboard, serverConfig.dashboard.allowInsecureHTTP);
 app.use('/dashboard', dashboard);

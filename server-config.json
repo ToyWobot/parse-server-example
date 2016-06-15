@@ -1,7 +1,6 @@
 {
   "servers":
-  {
-      "eddy":
+  [
       {
           "databaseURI": "mongodb://heroku_3fz1xrmt:d1edrqdq3amnljg795dl7f784r@ds035290.mlab.com:35290/heroku_3fz1xrmt",
           "cloud": "cloud/edu/main.js",
@@ -30,8 +29,6 @@
               ]
           }
       },
-
-      "aly":
       {
           "databaseURI": "mongodb://heroku_vjzztwdt:apb6sgvmqronanrlophhr3u1kc@ds013014.mlab.com:13014/heroku_vjzztwdt",
           "cloud": "cloud/main.js",
@@ -40,15 +37,14 @@
           "restAPIKey": "REsA64SL5FIBIeZthgBDYWwY7daQpAm1",
           "clientKey": "RN2hNqvuelw4NyRNxrN3ELPPyAnD5cdk",
           "serverURL": "https://tw-parse-server.herokuapp.com/parse/aly",
-          "liveQuery": {
-            "classNames": ["Posts", "Comments"]
+          "liveQuery":{
+          "classNames": ["Posts", "Comments"]
           },
-          "push" :
+          "push":
           {
-
           }
       }
-  },
+  ],
 
   "dashboard":
   {
