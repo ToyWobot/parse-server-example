@@ -67,9 +67,9 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 
 var serverConfig = require('./server-config.json');
 var appServers = serverConfig.servers;
-appServers.forEach(function(app) {
-    var appObject = new ParseServer(app);
-    var s = app.serverURL.split('parse');
+appServers.forEach(function(options) {
+    var appObject = new ParseServer(options);
+    var s = options.serverURL.split('parse');
     console.log(s);
     var endPoint = '/parse'+ s[1];
     app.use(endPoint, appObject);
